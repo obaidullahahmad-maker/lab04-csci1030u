@@ -18,11 +18,33 @@ def main():
 
     args = parser.parse_args()
 
-    # TODO: open args.filename and read it with csv.reader. The first row is the
-    #   header. Find the position of args.column within the header, then print every
-    #   data row (its values joined by commas) whose value in that column equals
-    #   args.value.
+    # TODO: open args.filename and read it with csv.reader.
+    file = csv.reader(open(args.filename))
 
+    # The first row is the header.
+    header = next(file)
 
+    #   Find the position of args.column
+
+    index_col = header.index(args.column)
+    # print(header.index(args.column))
+
+    for row in file:
+        if row[index_col] == args.value:
+            # "-".join(["a", "b"])   # gives "a-b"
+            print(",".join(row))
+    #  within the header, then print every data row
+    #  (its values joined by commas) whose value in
+    #  that column equals args.value.
+
+    #     print(row)
 if __name__ == "__main__":
     main()
+
+# people.csv
+
+# name,city,age
+# Alice,Oshawa,30
+# Bob,Toronto,25
+# Cara,Oshawa,41
+# Dan,Whitby,52
